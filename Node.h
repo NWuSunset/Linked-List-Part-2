@@ -1,11 +1,15 @@
 #pragma once
+#ifndef NODE_H
+#define NODE_H
+
+
 #include "Student.h"
 
 
 class Node {
  public:
   Node(Student*); //Constructor that takes a Student pointer. Sets 'student' to the passed in pointer
-  ~Node(); //Destructor. Deletes 'next' and 'student'
+  ~Node(); //Destructor. Deletes 'student'
 
   Node(); //default constructor 
   Node* getNext(); //get next Node pointer. returns 'next'
@@ -17,3 +21,4 @@ class Node {
   Node* next; // 'next'
 };
 
+#endif

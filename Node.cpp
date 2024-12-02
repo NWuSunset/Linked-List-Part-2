@@ -19,6 +19,5 @@ void Node::setNext(Node* next) {
 }
 
 Node::~Node() {
-  delete next;
   delete student; //are we supposed to remove the student?
 }
