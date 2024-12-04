@@ -10,6 +10,8 @@ class Student {
  public:
   Student(char firstName[], char lastName[], int id, float gpa);
   Student();
+
+  int getId();
   
 private:
   char firstName[20];
