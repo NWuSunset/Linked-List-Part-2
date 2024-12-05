@@ -12,17 +12,17 @@ void addNodes(Node* &head, Node* curr, Node* node);
 
 int main() {
   Node* head = nullptr; //create the first (header) node in the list
-  Node* current = head; //Current node starts as the head node
   bool quit = false;
 
   char input[7]; 
 
   while (quit == false) {
     cout << "Do you want to ADD, PRINT, DELETE, or QUIT" << endl;
+    //    cin.ignore();
     cin.getline(input, 7);
 
     if (strcasecmp(input, "ADD") == 0) {
-      Add(head, current);
+      Add(head, head); //pass is head twice for current and head
     } else if (strcasecmp(input, "PRINT") == 0) {
       if (head != nullptr) {
         Print(head);
@@ -85,11 +85,15 @@ void addNodes(Node* &head, Node* curr, Node* node) { //Used to sort the nodes
     Print(head);
     return; //Exit the function
   }
+  cout << "Original list" << endl;
   Print(head);
 
+  
   if (curr->getNext() == nullptr) {
     curr->setNext(node); //if next node in the list is null; set it to the passed in node
+    return; //exit the function when we add a new one to a null space
   }
+  cout << "After checking if curr->getNext() is null" << endl;
   Print(head);
 
   //If the passed in node is less than the head node.
@@ -99,19 +103,20 @@ void addNodes(Node* &head, Node* curr, Node* node) { //Used to sort the nodes
     head = node;
     node = temp;
   }
+  cout << "After checking if passed in node is less than head node" << endl;
   Print(head);
 
 
   //If the next node is greater than the node passed in we want to swap their places in the list
-  if (curr->getNext()->getStudent()->getId() > node->getStudent()->getId()) {
+ if (curr->getNext()->getStudent()->getId() > node->getStudent()->getId()) {
     node->setNext(curr->getNext()); //Then set the greater node (next node) after the passed in node
     curr->setNext(node); //Then the node after current will be set to the passed in node
-    curr = curr->getNext(); //increment the current node up one
-    addNodes(head, curr, node);
-  }
+    cout << "Checking if next node is greater than node passed in" << endl;
+    Print(head);
+    return; //we can then stop the recursion 
+ }
+ addNodes(head, curr->getNext(), node); //Go through function again if there is still more list to go through (to fully sort it)  
+ 
+  cout << "Final result list" << endl;
   Print(head);
-
-
-  //A while loop going through the list is technically also valid
-  //While curr < node
 }

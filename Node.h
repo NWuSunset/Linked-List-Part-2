@@ -18,7 +18,7 @@ class Node {
 
  private:
   Student* student; // 'student'
-  Node* next; // 'next'
+  Node* next = nullptr; // 'next'
 };
 
 #endif
