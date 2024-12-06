@@ -15,3 +15,7 @@ Student::Student(char firstName[], char lastName[], int id, float gpa) {
 int Student::getId() {
   return id;
 }
+
+float Student::getGpa() {
+  return gpa;
+}

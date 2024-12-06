@@ -12,6 +12,7 @@ class Student {
   Student();
 
   int getId();
+  float getGpa();
   
 private:
   char firstName[20];
