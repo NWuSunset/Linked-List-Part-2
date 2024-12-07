@@ -8,14 +8,17 @@ using namespace std;
 void Add(Node* &head, Node* curr);
 void Print(Node* node);
 void Delete();
-void Average(Node* node);
+void Average(Node* node, int &num, float &total);
 void addNodes(Node* &head, Node* curr, Node* node);
 
 int main() {
   Node* head = nullptr; //create the first (header) node in the list
   bool quit = false;
 
-  char input[7]; 
+  int num = 1;
+  float total = 0;
+
+  char input[8];
 
   while (quit == false) {
     cout << "Do you want to ADD, PRINT, DELETE, AVERAGE (Averages student gpas), or QUIT" << endl;
@@ -34,7 +37,7 @@ int main() {
       Delete();
     } else if (strcasecmp(input, "AVERAGE") == 0) {
       if (head != nullptr) {
-	Average(head);
+	      Average(head, num, total);
       } else {
 	cout << "There are no students in the list" << endl;
       }
@@ -127,18 +130,14 @@ void addNodes(Node* &head, Node* curr, Node* node) { //Used to sort the nodes
 }
 
 //Prints out the average gpa of all students
-void Average(Node* node) {
-  int average = 0;
-  int num = 1;
-  int total = 0;
-  
+void Average(Node* node, int &num, float &total) {
   total += node->getStudent()->getGpa(); //add gpa to the average
-  
-  
+
   if (node->getNext() != nullptr) {
-    num++; //number of things in the list incriment
-    Average(node->getNext());
+    num++; //number of things in the list increment
+    Average(node->getNext(), num, total);
   } else { //if the end of the list is hit
+    float average = 0;
     average = (total/num);
     cout << "GPA average: " << average << endl;
   }
