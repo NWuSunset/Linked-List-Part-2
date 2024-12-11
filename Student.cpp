@@ -19,3 +19,19 @@ int Student::getId() {
 float Student::getGpa() {
   return gpa;
 }
+
+char* Student::getFirstName() {
+  char* toReturn;
+  toReturn = firstName;
+  return toReturn;
+}
+
+char* Student::getLastName() {
+  char* toReturn;
+  toReturn = lastName;
+  return toReturn;
+}
+
+~Student() {
+  
+}

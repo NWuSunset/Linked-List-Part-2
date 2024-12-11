@@ -10,9 +10,12 @@ class Student {
  public:
   Student(char firstName[], char lastName[], int id, float gpa);
   Student();
-
+  ~Student();
+  
   int getId();
   float getGpa();
+  char* getFirstName();
+  char* getLastName();
   
 private:
   char firstName[20];

@@ -7,7 +7,8 @@ using namespace std;
 
 void Add(Node* &head, Node* curr);
 void Print(Node* node);
-void Delete();
+void Delete(Node* node);
+void deleteNodes(Node* node, int id);
 void Average(Node* node);
 void addNodes(Node* &head, Node* curr, Node* node);
 
@@ -31,7 +32,7 @@ int main() {
         cout << "There are no students in the list" << endl;
       }
     } else if (strcasecmp(input, "DELETE") == 0) {
-      Delete();
+      Delete(head);
     } else if (strcasecmp(input, "AVERAGE") == 0) {
       if (head != nullptr) {
 	Average(head);
@@ -71,20 +72,51 @@ void Add(Node* &head, Node* curr) {
 
 //Go though all the nodes in the list using recursion
 void Print(Node* node) {
-  //test printing first:
-  cout << node->getStudent()->getId() << endl;
-
+  cout.setf(ios::showpoint); //show zeros in the decimal places
+  cout.precision(3); //to 2 decimal places (for the gpa)
+  
+  //Print out things for the student
+  cout << node->getStudent()->getFirstName() << ", "
+       << node->getStudent()->getLastName() << ", "
+       << node->getStudent()->getId() << ", "
+       << node->getStudent()->getGpa() << endl;
 
   if (node->getNext() != nullptr) {
   Print(node->getNext());
     }
 }
 
-void Delete() {
-  
+void Delete(Node* node) {
+  char id;
+  if (node == nullptr) {
+    cout << "Empty List!" << endl;
+    return;
+  }
+  cout << "Enter the student id you wish to delete: " << endl;
+  cin >> id;
+  cin.ignore();
+
+  deleteNodes(node, id); 
 }
 
+void deleteNodes(Node* curr, int id) {
+  //Check if it's the only node in the list...
 
+  //Find that id in the list
+  if (curr->getNext()->getStudent()->getId() == input) {
+    Node* temp = curr->getNext(); //save the node to delete
+    curr->setNext(curr->getNext()->getNext()); //set the next node to the one after the node we are removing
+    
+    //delete the node from the linked list
+    delete temp;
+
+    
+  } else if (curr->getNext() != nullptr) { //if a next node exists...
+    deleteNodes(curr->getnext()); //Try the next node
+  } else {
+    cout << "The id doesn't exit in the list" << endl;
+  }
+}
 
 //Sorts the list from lowest to highest student id.
 void addNodes(Node* &head, Node* curr, Node* node) { //Used to sort the nodes
