@@ -7,8 +7,8 @@ using namespace std;
 
 void Add(Node* &head, Node* curr);
 void Print(Node* node);
-void Delete(Node* node);
-void deleteNodes(Node* node, int id);
+void Delete(Node* node, Node* &head);
+void deleteNodes(Node* node, int id, Node* &head);
 void Average(Node* node, int &num, float &total);
 void addNodes(Node* &head, Node* curr, Node* node);
 
@@ -35,7 +35,7 @@ int main() {
         cout << "There are no students in the list" << endl;
       }
     } else if (strcasecmp(input, "DELETE") == 0) {
-      Delete(head);
+      Delete(head, head);
     } else if (strcasecmp(input, "AVERAGE") == 0) {
       if (head != nullptr) {
 	      Average(head, num, total);
@@ -89,33 +89,41 @@ void Print(Node* node) {
     }
 }
 
-void Delete(Node* node) {
-  char id;
+void Delete(Node* node, Node* &head) {
+  int id;
   if (node == nullptr) {
     cout << "Empty List!" << endl;
     return;
   }
   cout << "Enter the student id you wish to delete: " << endl;
   cin >> id;
-  cin.ignore();
 
-  deleteNodes(node, id); 
+  deleteNodes(node, id, head);
+  cin.ignore();
 }
 
-void deleteNodes(Node* curr, int id) {
-  //Check if it's the only node in the list...
+void deleteNodes(Node* curr, int id, Node* &head) {
+  if (curr == head) { //In the case that curr is the head
+    if (curr->getStudent()->getId() == id) {
+      delete curr;
+      head = nullptr;
+      return;
+    }
+  }
 
-  //Find that id in the list
-  if (curr->getNext()->getStudent()->getId() == input) {
-    Node* temp = curr->getNext(); //save the node to delete
-    curr->setNext(curr->getNext()->getNext()); //set the next node to the one after the node we are removing
-    
-    //delete the node from the linked list
-    delete temp;
-
-    
-  } else if (curr->getNext() != nullptr) { //if a next node exists...
-    deleteNodes(curr->getnext()); //Try the next node
+  if (curr->getNext() != nullptr) {
+    //If we find the correct node to delete
+    if (curr->getNext()->getStudent()->getId() == id) {
+      Node* temp = curr->getNext(); //save the location of the node to delete
+      curr->setNext(curr->getNext()->getNext()); //set the next node to the one after the node we are removing
+      
+      //delete the node from the linked list
+      delete temp;
+      
+    } else {
+      //Try the next node in the list to see if it matches the id
+      deleteNodes(curr->getNext(), id, head); 
+    } 
   } else {
     cout << "The id doesn't exit in the list" << endl;
   }
@@ -172,5 +180,9 @@ void Average(Node* node, int &num, float &total) {
     float average = 0;
     average = (total/num);
     cout << "GPA average: " << average << endl;
+
+    //reset values
+    total = 0;
+    num = 1;
   }
 }

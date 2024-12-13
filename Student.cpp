@@ -32,6 +32,6 @@ char* Student::getLastName() {
   return toReturn;
 }
 
-~Student() {
-  
+Student::~Student() {
+  //Can only call delete on a pointer allocated with new[]?
 }
