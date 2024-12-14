@@ -45,6 +45,7 @@ int main() {
             Delete(head, head);
         } else if (strcasecmp(input, "AVERAGE") == 0) {
             if (head != nullptr) {
+                cout << "Averaging grades..." << endl;
                 Average(head, num, total);
             } else {
                 cout << "There are no students in the list" << endl;
@@ -74,6 +75,7 @@ void Add(Node* & head, Node* curr) {
     Student* student = new Student(firstName, lastName, id, gpa); //Create a new student with the information
     Node* node = new Node(student); //create a new node based on the student
 
+    cout << "Adding Student..." << endl; //just for fun
     addNodes(head, curr, node); //Make sure the nodes will be sorted into the list correctly
 }
 
@@ -127,6 +129,7 @@ void Delete(Node* node, Node* & head) {
     cout << "Enter the student id you wish to delete: " << endl;
     const int id = validInput<int>();
 
+    cout << "Deleting student..." << endl;
     deleteNodes(node, id, head);
     cin.ignore();
 }
@@ -191,7 +194,6 @@ void Average(Node* node, float& num, float& total) {
         float average = 0;
         average = (total / num);
         cout << "GPA average: " << average << endl;
-
         //reset values
         total = 0;
         num = 1;
