@@ -7,21 +7,21 @@
 using namespace std;
 
 class Student {
- public:
-  Student(char firstName[], char lastName[], int id, float gpa);
-  Student();
-  ~Student();
-  
-  int getId();
-  float getGpa();
-  char* getFirstName();
-  char* getLastName();
-  
+public:
+    Student(char firstName[], char lastName[], int id, float gpa);
+    Student();
+    ~Student();
+
+    int getId() const;
+    float getGpa() const;
+    char* getFirstName();
+    char* getLastName();
+
 private:
-  char firstName[20];
-  char lastName[20];
-  int id;
-  float gpa;
+    char firstName[20]{};
+    char lastName[20]{};
+    int id{};
+    float gpa{};
 };
 
 #endif
