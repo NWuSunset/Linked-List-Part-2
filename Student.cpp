@@ -4,7 +4,7 @@
 
 Student::Student() = default;
 
-Student::Student(char firstName[], char lastName[], int id, float gpa) {
+Student::Student(char firstName[], char lastName[], const int id, const float gpa) {
     strcpy(this->firstName, firstName);
     strcpy(this->lastName, lastName);
     this->id = id;

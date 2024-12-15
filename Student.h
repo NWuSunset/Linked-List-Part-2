@@ -18,10 +18,10 @@ public:
     char* getLastName();
 
 private:
-    char firstName[20];
-    char lastName[20];
-    int id;
-    float gpa;
+    char firstName[20]{}; //Fields are initialized (with defaults {} ) just in case
+    char lastName[20]{};
+    int id{};
+    float gpa{};
 };
 
 #endif

@@ -4,6 +4,12 @@
 #include <cstring>
 #include <limits> //used just to clear invalid inputs
 
+/*
+ * Nathaniel Wu 12/17/2024
+ * Program that uses a linked list to store a list of students
+ * Users can Add, Delete, print out students, or average gpas
+ * Recursion is used within the respective functions to move through the linked list
+ */
 
 using namespace std;
 
@@ -17,9 +23,10 @@ template <typename T>
 T validInput();
 
 int main() {
-    Node* head = nullptr; //create the first (header) node in the list
+    Node* head = nullptr; //The first (header) node in the list
     bool quit = false;
 
+    //Used for the average function
     float num = 1;
     float total = 0;
 
@@ -27,14 +34,16 @@ int main() {
         char input[8];
         cout << "Do you want to ADD, PRINT, DELETE, AVERAGE (Averages student gpas), or QUIT" << endl;;
         cin.getline(input, 8);
+
+        //in case more than 8 characters are entered (so it won't break the program)
         if (cin.fail()) {
-            //in case more than 8 is entered
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
 
+        //Getting the user input selection
         if (strcasecmp(input, "ADD") == 0) {
-            Add(head, head); //pass is head twice for current and head
+            Add(head, head); //pass is head twice for &head and a current node (head the first time it's passed in)
         } else if (strcasecmp(input, "PRINT") == 0) {
             if (head != nullptr) {
                 Print(head);
@@ -57,6 +66,7 @@ int main() {
     return 0;
 }
 
+//Prompts the user for student information, then creates a node using that information and calls addNodes() to sort the list
 void Add(Node* & head, Node* curr) {
     //individual variables for clarity
     char firstName[20];
@@ -121,6 +131,7 @@ void addNodes(Node* & head, Node* curr, Node* node) {
     addNodes(head, curr->getNext(), node);
 }
 
+//Prompts the user for which student to delete, then calls deleteNodes() to remove the student from the list
 void Delete(Node* node, Node* & head) {
     if (node == nullptr) {
         cout << "Empty List!" << endl;
@@ -134,6 +145,7 @@ void Delete(Node* node, Node* & head) {
     cin.ignore();
 }
 
+//Deletes a node from the list, making sure the list reorders correctly
 void deleteNodes(Node* curr, int id, Node* & head) {
     if (curr == head) {
         //In the case that curr is the head
@@ -166,7 +178,7 @@ void deleteNodes(Node* curr, int id, Node* & head) {
     }
 }
 
-//Go though all the nodes in the list using recursion
+//Go though all the nodes in the list using recursion (and prints out the student information for those respective nodes)
 void Print(Node* node) {
     cout.setf(ios::showpoint); //show zeros in the decimal places
     cout.precision(3); //to 2 decimal places (for the gpa)
@@ -201,6 +213,7 @@ void Average(Node* node, float& num, float& total) {
 }
 
 //This is just for clearing invalid inputs so it doesn't break the program (I'm not using it for any logic :) (if templates aren't allowed) )
+//Clears invalid inputs for types that use cin >>
 template <typename T>
 T validInput() {
     //Template makes it able to take any data type (so I don't have to write code for different types...)
