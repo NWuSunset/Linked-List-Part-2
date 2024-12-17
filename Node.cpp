@@ -1,23 +1,25 @@
 #include "Node.h"
+#include "Student.h"
 
-Node::Node() = default; 
+//constuctor
+Node::Node(Student* student) : student(student), node(nullptr) {}
 
-Node::Node(Student* student) {
-  this->student = student;
-}
-
-Node* Node::getNext() {
-  return next; 
-}
-
-Student* Node::getStudent() {
-  return student; //returns the student pointer
-}
-
-void Node::setNext(Node* next) {
-  this->next = next; //set the 'next' node in the node class to the passed in node
-}
-
+//destructor
 Node::~Node() {
-  delete student; //are we supposed to remove the student?
+  delete student;
+}
+
+//retursn pointer to next node
+Node* Node::getNext() {
+  return node;
+}
+
+//get pointer to student obj
+Student* Node::getStudent() {
+  return student;
+}
+
+//set pointer to next node
+void Node::setNext(Node* nextnode) {
+  node = nextnode;
 }
