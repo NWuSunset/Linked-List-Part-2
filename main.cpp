@@ -159,7 +159,6 @@ void addNodes(Node* &head, Node* curr, Node* node) { //Used to sort the nodes
  if (curr->getNext()->getStudent()->getId() > node->getStudent()->getId()) {
     node->setNext(curr->getNext()); //Then set the greater node (next node) after the passed in node
     curr->setNext(node); //Then the node after current will be set to the passed in node
-    cout << "Checking if next node is greater than node passed in" << endl;
     Print(head);
     return; //we can then stop the recursion 
  }
