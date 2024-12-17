@@ -6,7 +6,7 @@
 
 /*
  * Nathaniel Wu 12/17/2024
- * Program that uses a linked list to store a list of students
+ * Program that uses a linked list to store a list of students (Student name, id, gpa)
  * Users can Add, Delete, print out students, or average gpas
  * Recursion is used within the respective functions to move through the linked list
  */
@@ -19,6 +19,7 @@ void Delete(Node* node, Node* & head);
 void deleteNodes(Node* curr, int id, Node* & head);
 void Print(Node* node);
 void Average(Node* node, float& num, float& total);
+
 template <typename T>
 T validInput();
 
@@ -121,7 +122,6 @@ void addNodes(Node* & head, Node* curr, Node* node) {
     if (curr->getNext()->getStudent()->getId() > node->getStudent()->getId()) {
         node->setNext(curr->getNext()); //Then set the greater node (next node) after the passed in node
         curr->setNext(node); //Then the node after current will be set to the passed in node
-        cout << "Checking if next node is greater than node passed in" << endl;
         Print(head);
         return; //we can then stop the recursion
     }
@@ -192,6 +192,7 @@ void Print(Node* node) {
     if (node->getNext() != nullptr) {
         Print(node->getNext());
     }
+}
 
 //Prints out the average gpa of all students
 void Average(Node* node, float& num, float& total) {
@@ -211,7 +212,6 @@ void Average(Node* node, float& num, float& total) {
     }
 }
 
-//This is just for clearing invalid inputs so it doesn't break the program (I'm not using it for any logic :) (if templates aren't allowed) )
 //Clears invalid inputs for types that use cin >>
 template <typename T>
 T validInput() {
